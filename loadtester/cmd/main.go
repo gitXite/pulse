@@ -3,16 +3,29 @@ package main
 import (
 	"flag"
 	"fmt"
+
+	version "github.com/gitXite/pulse/loadtester/internal/version"
 )
 
 func main() {
+	// command option flags
 	url := flag.String("url", "http://localhost:8080", "Target URL to test.")
 	flag.StringVar(url, "u", "http://localhost:8080", "Alias for target URL.")
 	requests := flag.Int("requests", 100, "Total number of requests.")
 	flag.IntVar(requests, "r", 100, "Alias for total requests.")
 	concurrency := flag.Int("concurrency", 10, "Number of concurrent workers.")
 	flag.IntVar(concurrency, "c", 10, "Alias for concurrent workers.")
+
+	// global option flags
+	versionFlag := flag.Bool("version", false, "Print version information and exit.")
+	flag.BoolVar(versionFlag, "v", false, "Alias for version information.")
+	
 	flag.Parse()
+
+	if (*versionFlag) {
+		fmt.Println(version.Version)
+		return
+	}
 
 	fmt.Printf("Running pulse on %s with %d requests and %d concurrent workers\n", *url, *requests, *concurrency)
 	
