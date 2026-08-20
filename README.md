@@ -3,7 +3,7 @@
 <div style="flex">
   <img src="web/public/icon-reversed-1024.png" alt="Icon" width="200" />
   <p align="left">
-    <img src="https://img.shields.io/badge/TypeScript-%E2%9C%94-blue?logo=go" alt="Go">
+    <img src="https://img.shields.io/badge/Go-%E2%9C%94-blue?logo=go" alt="Go">
     <img src="https://img.shields.io/github/last-commit/gitXite/pulse" alt="Last Commit">
     <img src="https://img.shields.io/github/languages/top/gitXite/pulse" alt="Top Language">
   </p>
