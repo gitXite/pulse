@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"os"
 
 	version "github.com/gitXite/pulse/loadtester/internal/version"
@@ -10,55 +9,30 @@ import (
 
 func main() {
 	// global option flags
-	versionFlag := flag.Bool("version", false, "Print version information and exit.")
-	flag.BoolVar(versionFlag, "v", false, "Alias for version information.")
+	versionFlag := flag.Bool("version", false, "print version information and exit.")
+	flag.BoolVar(versionFlag, "v", false, "alias for version information.")
 
-	helpFlag := flag.Bool("help", false, "Print help menu and exit.")
-	flag.BoolVar(helpFlag, "h", false, "Alias for help menu")
+	helpFlag := flag.Bool("help", false, "print help menu and exit.")
+	flag.BoolVar(helpFlag, "h", false, "alias for help menu")
 
-	// run command and option flags
-	if len(os.Args) > 1 && os.Args[1] == "run" {
-		runFlags := flag.NewFlagSet("run", flag.ExitOnError)
-
-		url := runFlags.String("url", "http://localhost:8080", "Target URL to test.")
-		runFlags.StringVar(url, "u", "http://localhost:8080", "Alias for target URL.")
-
-		requests := runFlags.Int("requests", 100, "Total number of requests.")
-		runFlags.IntVar(requests, "r", 100, "Alias for total requests.")
-
-		concurrency := runFlags.Int("concurrency", 10, "Number of concurrent workers.")
-		runFlags.IntVar(concurrency, "c", 10, "Alias for concurrent workers.")
-
-		runFlags.Parse(os.Args[2:])
-		fmt.Printf("Running pulse on %s with %d requests and %d concurrent workers\n", *url, *requests, *concurrency)
-		return
+	// check for commands
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "run":
+			run() // parses flags and runs pulse
+		case "start":
+			start() // parses flags and starts pulse TUI
+		}
 	}
 
 	flag.Parse()
 
 	if *versionFlag {
-		fmt.Println(version.Version)
+		version.PrintVersion()
 		return
 	}
 	if *helpFlag {
-		fmt.Printf("Pulse %s\n", version.Version)
-		fmt.Println("A lightweight load-testing toolkit")
-		fmt.Println()
-		fmt.Println("USAGE:\n	pulse [GLOBAL OPTIONS] <COMMAND> [COMMAND OPTIONS] [ARGUMENTS]")
-		fmt.Println()
-		fmt.Println("COMMANDS:")
-		fmt.Println("	run   Execute the core worker processes.")
-		fmt.Println()
-		fmt.Println("COMMAND OPPTIONS:")
-		fmt.Println("	-u, --url			Target URL to test.")
-		fmt.Println("	-r, --requests		Total number of requests.")
-		fmt.Println("	-c, --concurrency	Number of concurrent workers.")
-		// fmt.Println("	-C, --config		Read from a .yaml config file.")
-		fmt.Println()
-		fmt.Println("GLOBAL OPTIONS:")
-		fmt.Println("	-h, --help     Print this help menu and exit.")
-		fmt.Println("	-v, --version  Print version information and exit.")
-		// fmt.Println("	-q, --quiet    Suppress all standard output logs.")
+		printHelp()
 		return
 	}
 
