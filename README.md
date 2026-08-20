@@ -1,5 +1,6 @@
 # Pulse
-![icon-reversed-1024](web/public/icon-reversed-1024.png)
+
+<img src="web/public/icon-reversed-1024.png" alt="Icon" width="200" />
 
 ### A lightweight HTTP load-testing tool written in Go
 
@@ -57,4 +58,4 @@ This repository will document that progression, including architectural decision
 
 ---
 
-> Pulse is a project about building a load tester, but more importantly, about learning how to design and build systems that can handle load.
+Pulse is a project about building a load tester, but more importantly, about learning how to design and build systems that can handle load.
