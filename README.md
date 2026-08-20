@@ -1,4 +1,5 @@
 # Pulse
+![icon-reversed-1024](web/public/icon-reversed-1024.png)
 
 ### A lightweight HTTP load-testing tool written in Go
 
